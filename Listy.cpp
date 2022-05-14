@@ -41,11 +41,10 @@ void DeleteNodeBeforeSelectedVal(node*& H, int x)
 {
     if (H != NULL)
     {
-
-        node* p = H;
-        if (p->next != NULL && p->next->val == x) delete(p);
+        if (H->next != NULL && H->next->val == x) Delete(H);
         else 
         {
+            node* p = H;
             while (p->next->next != NULL && p->next->next->val != x) p = p->next;
             if (p->next->next != NULL) Delete(p->next);
         }
@@ -183,7 +182,7 @@ int main()
     Add(T, 3);
     Add(T, 4);
     Show(T);
-    DeleteSelectNode(T, 3);
+    DeleteNodeBeforeSelectedVal(T, 3);
     Show(T);
     /*
     node* H = NULL;
