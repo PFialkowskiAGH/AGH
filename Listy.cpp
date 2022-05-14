@@ -14,41 +14,43 @@ void Add(node*& H, int x)
     p->val = x;
     p->next = H;
     H = p;
-}
+};
 
 void Delete(node*& H)
 {
     node* p = H;
     H = p->next;
     delete p;
-}
+};
 
 void DeleteSelectNode(node*& H, int x)
 {
     if (H != NULL)
-    { 
-        if (H->next->val == x) Delete(H);
-        else {
+    {
+        if (H->val == x) Delete(H);
+        else 
+        {
             node* p = H;
             while (p->next != NULL && p->next->val != x) p = p->next;
             if (p->next != NULL) Delete(p->next);
         }
     }
-}
+};
 
 void DeleteNodeBeforeSelectedVal(node*& H, int x)
 {
     if (H != NULL)
     {
-        
+
         node* p = H;
         if (p->next != NULL && p->next->val == x) delete(p);
-        else {
+        else 
+        {
             while (p->next->next != NULL && p->next->next->val != x) p = p->next;
             if (p->next->next != NULL) Delete(p->next);
         }
     }
-}
+};
 
 void DuplicateAllNodes(node*& H)
 {
@@ -61,7 +63,7 @@ void DuplicateAllNodes(node*& H)
             p = p->next->next;
         }
     }
-}
+};
 
 void DuplicateNodesByVal(node*& H)
 {
@@ -78,7 +80,7 @@ void DuplicateNodesByVal(node*& H)
             p = r;
         }
     }
-}
+};
 
 void DuplicateReverseList(node*& H)
 {
@@ -86,7 +88,7 @@ void DuplicateReverseList(node*& H)
     {
         node* p = H;
         node* n = NULL;
-        while (p != NULL) 
+        while (p != NULL)
         {
             Add(n, p->val);
             p = p->next;
@@ -95,7 +97,7 @@ void DuplicateReverseList(node*& H)
         while (p->next != NULL) p = p->next;
         p->next = n;
     }
-}
+};
 
 void DuplicateList(node*& H)
 {
@@ -127,28 +129,39 @@ void DuplicateList(node*& H)
         while (p->next != NULL) p = p->next;
         p->next = n;
     }
-}
+};
 
 void SwapFirstWithSecond(node*& H)
 {
-    if (H->next->next != NULL) {
-        int pInt = H->next->val;
-        Delete(H->next);
-        Add(H, pInt);
+    if (H->next != NULL) 
+    {
+        node* p = H;
+        H = p->next;
+        p->next = H->next;
+        H->next = p;
     }
-}
+};
 
 void SwapFirstWithLast(node*& H)
 {
-    if (H->next != NULL) {
-        node* p = H;
-        while (p->next != NULL) p = p->next;
-        int pInt = p->val;
-        p->val = H->val;
-        Delete(H);
-        Add(H, pInt);
+    if (H->next != NULL) 
+    {
+        if (H->next->next == NULL) 
+        {
+            SwapFirstWithSecond(H);
+        }
+        else 
+        {
+            node* p = H;
+            node* p2 = H;
+            while (p->next->next != NULL) p = p->next;
+            H = p->next;
+            H->next = p2->next;
+            p->next = p2;
+            p2->next = NULL;
+        }
     }
-}
+};
 
 void Show(node* H)
 {
@@ -160,10 +173,18 @@ void Show(node* H)
         p = p->next;
     }
     cout << "Null" << endl;
-}
+};
 
 int main()
 {
+    node* T = NULL;
+    Add(T, 10);
+    Add(T, 8);
+    Add(T, 3);
+    Add(T, 4);
+    Show(T);
+    DeleteSelectNode(T, 3);
+    Show(T);
     /*
     node* H = NULL;
     node* p = new node;
@@ -248,4 +269,4 @@ int main()
     Show(H6);
 
     return 0;
-}
+};
