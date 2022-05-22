@@ -1,0 +1,83 @@
+// BubbleSort.cpp : Defines the entry point for the console application.
+//
+
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+	int val;
+	node* next;
+};
+
+void Add(node*& H, int x)
+{
+	node* p = new node;
+	p->val = x;
+	p->next = H;
+	H = p;
+};
+
+void Delete(node*& H)
+{
+	node* p = H;
+	H = p->next;
+	delete p;
+};
+
+void bubbleSort(node*& H)
+{
+	if (H != NULL) 
+	{
+		node* p = NULL;
+		bool isSorted = false;
+		while (isSorted == false)
+		{
+			isSorted = true;
+			p = H;
+			while (p->next != NULL)
+			{
+			    cout << "Elo" << endl;
+				if (p->val > p->next->val)
+				{
+					int val = p->val;
+					Delete(p);
+					Add(p->next->next, val);
+					isSorted = false;
+				}
+				p = p->next;
+			}
+		}
+	}
+};
+
+void Show(node* H)
+{
+	cout << "H->";
+	node* p = H;
+	while (p != NULL)
+	{
+		cout << p->val << "->";
+		p = p->next;
+	}
+	cout << "NULL" << endl;
+};
+
+int main()
+{
+	cout << "Sortowanie: " << endl;
+	node* H = NULL;
+	Add(H, 5);
+	Add(H, 12);
+	Add(H, -7);
+	Add(H, 6);
+	Add(H, 3);
+	Add(H, 8);
+	//Show(H5);
+	cout << "work";
+	bubbleSort(H);
+	Show(H);
+}
+
+
