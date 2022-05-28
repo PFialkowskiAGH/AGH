@@ -50,7 +50,7 @@ int partitionMedium(int* tab, int l, int r)
 void quickSort(int* tab, int l, int r)
 {
 	if (l >= r) return;
-	int p = partitionMedium(tab, l, r); // Hoare ’s , Lomuto, medium
+	int p = partitionMedium(tab, l, r); // Hoare â€™s , Lomuto, medium
 	quickSort(tab, l, p - 1);
 	quickSort(tab, p + 1, r);
 }
