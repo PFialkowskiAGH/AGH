@@ -95,20 +95,8 @@ void deleteNode(node*& root)
 		{
 			node* succOrPred = NULL;
 			findSuccessor(root, succOrPred);
-			//cout << succOrPred->val << endl;
 			if (succOrPred == NULL) findPredecessor(root, succOrPred);
-			node* p = new node;
-			p->val = succOrPred->val;
-			p->up = root->up;
-			p->L = root->L;
-			p->R = root->R;
-			if (root->up != NULL)
-			{
-				if (root->up->L == root) root->up->L = p;
-				else root->up->R = p;
-			}
-			//cout << "usuwam" << root->val;
-			delete root;
+			root->val = succOrPred->val;
 			deleteNode(succOrPred);
 			
 		}
