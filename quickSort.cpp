@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int partitionLomuto(int* tab, int l, int r)
+int partitionLomuto(int* tab, int l, int r) 
 {
 	int x = tab[r];
 	int i = l - 1;
@@ -21,7 +21,7 @@ int partitionHoare(int* tab, int l, int r)
 	int i = l, j = r + 1;
 	while (true) {
 		do { i++; } while (i <= r && tab[i] < x);
-		do { j--; } while (tab[j] > x);
+		do { j --; } while (tab[j] > x);
 		if (i > j) break;
 		swap(tab[i], tab[j]);
 	}
@@ -31,15 +31,15 @@ int partitionHoare(int* tab, int l, int r)
 
 int partitionMedium(int* tab, int l, int r)
 {
-	swap(tab[l + 1], tab[(l + r) >> 1]);
-	if (tab[l + 1] > tab[r]) swap(tab[l + 1], tab[r]);
-	if (tab[l] > tab[r]) swap(tab[l], tab[r]);
-	if (tab[l] > tab[l + 1]) swap(tab[l + 1], tab[l]);
-	int x = tab[l];
+    swap(tab[l+1], tab[(l+r)>>1]);
+    if (tab[l+1] > tab[r]) swap(tab[l+1], tab[r]);
+    if (tab[l] > tab[r]) swap(tab[l], tab[r]);
+    if (tab[l] > tab[l+1]) swap(tab[l+1], tab[l]);
+    int x = tab[l];
 	int i = l, j = r + 1;
 	while (true) {
 		do { i++; } while (i <= r && tab[i] < x);
-		do { j--; } while (tab[j] > x);
+		do { j --; } while (tab[j] > x);
 		if (i > j) break;
 		swap(tab[i], tab[j]);
 	}
@@ -59,7 +59,7 @@ void bubbleSort(int* tab, int l, int r)
 {
 	for (int i = l; i < r; i++)
 	{
-		for (int j = l; j < r - 1; j++)
+		for (int j = l; j < r-1; j++)
 		{
 			if (tab[j] > tab[j + 1])
 				swap(tab[j], tab[j + 1]);
@@ -70,13 +70,13 @@ void bubbleSort(int* tab, int l, int r)
 
 void quickSortHybrid(int* tab, int l, int r)
 {
-	if (r - l >= 10)
-	{
-		int p = partitionMedium(tab, l, r);
-		quickSortHybrid(tab, l, p - 1);
-		quickSortHybrid(tab, p + 1, r);
-	}
-	else bubbleSort(tab, l, r);
+    if (r-l >= 10)
+    {
+        int p = partitionMedium(tab, l, r);
+        quickSortHybrid(tab, l, p-1);
+        quickSortHybrid(tab, p+1, r);
+    }
+    else bubbleSort(tab, l, r);
 }
 
 void showTable(int* tab, int size)
@@ -104,24 +104,24 @@ int main()
 	//showTable(tab, 100);
 	int* tab21 = tab2;
 	int* tab22 = tab2;
-
+	
 	//Pierwsza wersja
 	int start = clock();
-	quickSortHybrid(tab2, 0, 99);
-	int end = clock();
-	cout << "Hybrid, it took " << end - start << "ticks, or " << ((float)end - start) / CLOCKS_PER_SEC << "seconds." << endl;
-
-	//Druga wersja
-	start = clock();
-	quickSort(tab21, 0, 99);
-	end = clock();
-	cout << "Hybrid, it took " << end - start << "ticks, or " << ((float)end - start) / CLOCKS_PER_SEC << "seconds." << endl;
-
-	//Trzecia wersja
-	start = clock();
-	bubbleSort(tab22, 0, 99);
-	end = clock();
-	cout << "Hybrid, it took " << end - start << "ticks, or " << ((float)end - start) / CLOCKS_PER_SEC << "seconds." << endl;
+    quickSortHybrid(tab2, 0, 999);
+    int end = clock();
+    cout << "Hybrid, it took " << end - start << "ticks, or " << ((float)end - start)/CLOCKS_PER_SEC << "seconds." << endl;
+    
+    //Druga wersja
+    start = clock();
+    quickSort(tab21, 0, 999);
+    end = clock();
+    cout << "Qucik, it took " << end - start << "ticks, or " << ((float)end - start)/CLOCKS_PER_SEC << "seconds." << endl;
+    
+    //Trzecia wersja
+    start = clock();
+    bubbleSort(tab22, 0, 999);
+    end = clock();
+    cout << "Bubble, it took " << end - start << "ticks, or " << ((float)end - start)/CLOCKS_PER_SEC << "seconds." << endl;
 
 	return 0;
 }
