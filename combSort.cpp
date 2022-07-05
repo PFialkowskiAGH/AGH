@@ -31,7 +31,7 @@ void combSort(int* tab, int size, int gap)
 	if (gap == 1) bubbleSort(tab, size);
 	else
 	{
-		for (int i = 0; i < size; i = i + gap)
+		for (int i = 0; i + gap < size; i++)
 		{
 			if (i + gap < size)
 			{
